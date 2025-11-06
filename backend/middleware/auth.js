@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 const authMiddleware = async (req,res,next) => {
@@ -8,6 +10,7 @@ const authMiddleware = async (req,res,next) => {
         return res.json({success: false , message: "Not Authorized Login Again"})
     }
     try{
+        console.log('jwt',process.env.JWT_SECRET)
         const token_decode = jwt.verify(token,process.env.JWT_SECRET,{complete: true});
         console.log(token_decode)
      
